@@ -20,6 +20,7 @@ class MocapInstance {
   void drawMocap() {
     pushMatrix();
     stroke(clr);
+    noStroke();
     strokeWeight(strkWgt);
     translate(translation[0], translation[1], translation[2]);
     scale(scl);
