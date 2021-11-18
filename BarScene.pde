@@ -1,7 +1,7 @@
 public class BarScene {
-    Wall wallRight = new Wall(1, 1000, 1000);
-    Wall wallLeft = new Wall(1000, 1000, 1);
-    Wall floor = new Wall(1000, 1, 1000);
+    Wall wallRight = new Wall(1000, 1000);
+    Wall wallLeft = new Wall(1000, 1000);
+    Wall floor = new Wall(1000, 1000);
 
     Shelf shelf = new Shelf(600, 300, 100);
 
@@ -45,19 +45,21 @@ public class BarScene {
         float shelfDist = -tableShort.getW() * 1.5;
         // set floor
         pushMatrix();
-        translate(-wallRight.getD() / 2 + tableMain.getW() / 2, 0, wallRight.getD() / 2 + shelfDist - shelf.getD() / 2);
+            translate(-wallRight.getW() / 2 + tableMain.getW() / 2, 0, wallRight.getW() / 2 + shelfDist - shelf.getD() / 2);
+            rotateX(PI/2);
             floor.draw();
         popMatrix();
 
         // wall right
         pushMatrix();
-            translate(tableMain.getW() / 2, -wallRight.getH() / 2, wallRight.getD() / 2 + shelfDist - shelf.getD() / 2);
+            translate(tableMain.getW() / 2, -wallRight.getH() / 2, wallRight.getW() / 2 + shelfDist - shelf.getD() / 2);
+            rotateY(PI/2);
             wallRight.draw();
         popMatrix();
 
         // wall left
         pushMatrix();
-            translate(-wallRight.getD() / 2 + tableMain.getW() / 2, -wallRight.getH() / 2, shelfDist - shelf.getD() / 2);
+            translate(-wallRight.getW() / 2 + tableMain.getW() / 2, -wallRight.getH() / 2, shelfDist - shelf.getD() / 2);
             wallLeft.draw();
         popMatrix();
 
