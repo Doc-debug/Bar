@@ -14,11 +14,11 @@ void setup() {
     
     scene = new BarScene();
     animation = new BarAnimations();
-
+    
 }
 
 void draw() {
-    background(125);
+    background(0);
     defaultStyle();
     
     translate(0, 0, -500);

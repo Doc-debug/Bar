@@ -1,23 +1,29 @@
 public class Wall extends DrawableObject{
     
+    PImage tex;
+    float wTex;
+    float hTex;
     float w;
     float h;
     
-    public Wall(float wallWidth, float wallHeight) {
+    public Wall(float wallWidth, float wallHeight, PImage texture, float texWidth, float texHeight) {
         this.w = wallWidth;
         this.h = wallHeight;
+        this.wTex = texWidth;
+        this.hTex = texHeight;
+        this.tex = texture;
     }
     
     public void draw() {
         pushMatrix();
         pushStyle();
         beginShape();
-            //wall left
-            vertex(-this.w/2, -this.h/2, 0, 0, 0);
-            vertex(this.w/2, -this.h/2, 0, 500, 0);
-            vertex(this.w/2,  this.h/2, 0, 500, 500);
-            vertex( -this.w/2,  this.h/2, 0, 0, 500);
-            endShape(CLOSE);
+        texture(tex);
+        vertex( -this.w / 2, -this.h / 2, 0, 0, 0);
+        vertex(this.w / 2, -this.h / 2, 0, wTex, 0);
+        vertex(this.w / 2,  this.h / 2, 0, wTex, hTex);
+        vertex( -this.w / 2,  this.h / 2, 0, 0, hTex);
+        endShape(CLOSE);
         popStyle();
         popMatrix();
     }
