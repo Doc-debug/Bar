@@ -4,6 +4,7 @@ class MocapInstance {
   float[] translation;
   float scl, strkWgt;
   color clr;
+  int speed = 10; // frames skipped per iteration
  
   MocapInstance (Mocap mocap1, int startingFrame, float[] transl, float scl1, color clr1, float strkWgt1) {
     mocap = mocap1;
@@ -125,8 +126,8 @@ class MocapInstance {
     // currentFrame = currentFrame + 2 >= mocap.frameNumber ? currentFrame : currentFrame + 2;
 
     // restart animation when over
-    currentFrame = (currentFrame+1) % (mocap.frameNumber);
-    if (currentFrame==lastFrame+1) currentFrame = firstFrame; 
+    currentFrame = (currentFrame+speed) % (mocap.frameNumber);
+    if (currentFrame<=lastFrame) currentFrame = firstFrame; 
   }
 
   PVector calcMidPoint(PVector p1, PVector p2) {
@@ -160,7 +161,7 @@ class MocapInstance {
   }
 
   boolean isOver() {
-    return currentFrame + 1 >= mocap.frameNumber;
+    return currentFrame + speed >= mocap.frameNumber;
   }
 
   int getFrame() {
