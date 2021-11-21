@@ -87,7 +87,7 @@ public class BarScene {
         DrawableObject glass = glasses.getArray()[0];
         translate(0, -tableMain.getH() - glass.getH() / 2, 0);
         glasses.draw();
-        translate(0, glass.getH() / 2 - bottle.getH() / 2, 0);
+        translate(-tableMain.getW() * 0.4, glass.getH() / 2 - bottle.getH() / 2, 0);
         bottle.draw();
         popMatrix();
         
