@@ -134,6 +134,19 @@ class MocapInstance {
       return new PVector((p1.x + p2.x) / 2, (p1.y + p2.y) / 2, (p1.z + p2.z) / 2);
   }
 
+  void setLimbRotation(int limb, PVector initialDirection) {
+    Joint joint = mocap.joints.get(limb);
+    PVector p1 = joint.position.get(currentFrame);
+    PVector p2 = joint.parent.position.get(currentFrame);
+
+    PVector midPoint = p1.copy().add(p2).mult(0.5);
+    PVector newDirection = p2.copy().sub(p1).normalize(); 
+    PVector rotationAxis = initialDirection.cross(newDirection).normalize();
+    float rotationAngle = acos(initialDirection.dot(newDirection));
+
+    rotateZ(rotationAngle * rotationAxis.z);
+  }
+
   void alignToVector(PVector initialDirection, PVector p1, PVector p2) {
 
     PVector midPoint = p1.copy().add(p2).mult(0.5);
