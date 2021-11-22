@@ -30,6 +30,8 @@ public class BarAnimations {
     Glass glass_2 = new Glass(5);
     Bottle bottle = new Bottle(40);
 
+    int lerpFrameOffset = 100; // eg when switching bottle from hand to position how many frames before and after are used to lerp position
+
 
     public BarAnimations () {
        walkInMocap = new Mocap("mocap_data/person_walking_in.bvh");
@@ -106,29 +108,27 @@ public class BarAnimations {
             int walkinGrab = 4980;
             int walkinLetGo = 6270;
 
+            // local vector (from mocap data) * mocap scale + absolute vector(to mocap data)
+            PVector bottleInShelf = new PVector(-892.71533, 1350, 276.6314).mult(mocapScale).add(barKeeperOffset[0], barKeeperOffset[1], barKeeperOffset[2]);
+            PVector bottleInKeeper = barKeeperMocap.joints.get(15).position.get(barKeepFrame).copy().mult(mocapScale).add(barKeeperOffset[0], barKeeperOffset[1], barKeeperOffset[2]);
+            PVector bottleOnTable = new PVector(1000, 1176.4167, 60).mult(mocapScale).add(new PVector(barKeeperOffset[0], barKeeperOffset[1], barKeeperOffset[2]));
+            PVector bottleInDrunk = walkInMocap.joints.get(10).position.get(walkInMocapInst.getFrame()).copy().mult(mocapScale).add(new PVector(walkInOffset[0], walkInOffset[1], walkInOffset[2]));
+            PVector bottleOnTable2 = new PVector(-1600, 1196.7069, 650.9476).mult(mocapScale).add(new PVector(walkInOffset[0], walkInOffset[1], walkInOffset[2]));
+
             PVector bottle_pos;
             if(barKeepFrame < bartenderGrab) { // while the bottle is in the shelf
-                translate(barKeeperOffset[0], barKeeperOffset[1], barKeeperOffset[2]);
-                bottle_pos = new PVector(-892.71533, 1350, 276.6314);
-
+                bottle_pos = bottleInShelf;
             } else if(barKeepFrame >= bartenderGrab && barKeepFrame < bartenderLetGo) { // while the bottle is in the hand of the barkeeper
-                translate(barKeeperOffset[0], barKeeperOffset[1], barKeeperOffset[2]);
-                bottle_pos = barKeeperMocap.joints.get(15).position.get(barKeepFrame);
-
+                bottle_pos = PVector.lerp(bottleInShelf, bottleInKeeper, min((float) (barKeepFrame - bartenderGrab) / lerpFrameOffset, 1)); // lerp starts when bottle is grabbed
             } else if(barKeepFrame >= bartenderLetGo && barKeepFrame < walkinGrab) { // while the bottle is on the bartable
-                translate(barKeeperOffset[0], barKeeperOffset[1], barKeeperOffset[2]);
-                bottle_pos = new PVector(1000, 1176.4167, 60);
-
+                bottle_pos = PVector.lerp(bottleInKeeper, bottleOnTable, min((float) (barKeepFrame - bartenderLetGo) / lerpFrameOffset, 1));
             } else if(barKeepFrame >= walkinGrab && barKeepFrame < walkinLetGo) { // while the bottle is in the hand of the main person
-                translate(walkInOffset[0], walkInOffset[1], walkInOffset[2]);
-                bottle_pos = walkInMocap.joints.get(10).position.get(walkInMocapInst.getFrame());
-
+                bottle_pos = PVector.lerp(bottleOnTable, bottleInDrunk, min((float) (barKeepFrame - walkinGrab) / lerpFrameOffset, 1));
             } else { // after the main person but the bottle back on the bar table
-                translate(walkInOffset[0], walkInOffset[1], walkInOffset[2]);
-                bottle_pos = new PVector(-1600, 1196.7069, 650.9476);
+                bottle_pos = PVector.lerp(bottleInDrunk, bottleOnTable2, min((float) (barKeepFrame - walkinLetGo) / lerpFrameOffset, 1));
             }
 
-            translate(bottle_pos.x * mocapScale, bottle_pos.y * mocapScale, bottle_pos.z * mocapScale);
+            translate(bottle_pos.x, bottle_pos.y, bottle_pos.z);
             bottle.draw();
         popMatrix();
         popMatrix();
