@@ -6,6 +6,7 @@ public class BarScene {
     PImage entranceTex;
     Wall floor;
     PImage floorTex;
+
     
     Shelf shelf = new Shelf(600, 300, 100);
     
@@ -16,16 +17,12 @@ public class BarScene {
     Stool stoolRight = new Stool(50, 15);
     Stool stoolLeft = new Stool(50, 15);
     
+    DrawArray lamps = new DrawArray(createLamps(3, 400, 30), 3, 0, 0);
     DrawArray stools = new DrawArray(createStools(5, 80), 2, 0, 0, true, 0.2);
     
     DrawArray glasses = new DrawArray(createGlasses(4, 5), 10, 0, 0, true, 1.2);
     
     Bottle bottle = new Bottle(40);
-    
-    BodyRig testBody = new BodyRig(10, 50, new PVector( -50, 0, 0),  new PVector( -50, 50, -50), new PVector( -50, 100, 0), 
-        new PVector(50, 0, 0),   new PVector(50, 50, -50),  new PVector(50, 100, 0),
-        new PVector( -15, 80, 0), new PVector( -15, 130, 30), new PVector( -15, 180, 0),
-        new PVector(15, 80, 0),  new PVector(15, 130, 30),  new PVector(15, 180, 0));
     
     
     public BarScene() {
@@ -44,6 +41,8 @@ public class BarScene {
         // light
         pushMatrix();
         pointLight(255, 255, 255, -610, -1460, 1200);
+        translate(0, -backWall.getH(), 0);
+        lamps.draw();
         popMatrix();
         
         float shelfDist = -tableShort.getW() * 1.5;
@@ -128,6 +127,14 @@ public class BarScene {
             glasses[i] = new Glass(radius);
         }
         return glasses;
+    }
+    
+    Lamp[] createLamps(int n, float lampHeight, float radius) {
+        Lamp[] lamps = new Lamp[n];
+        for (int i = 0; i < n; ++i) {
+            lamps[i] = new Lamp(lampHeight, radius);
+        }
+        return lamps;
     }
     
     private void createWallsAndFloor() {
