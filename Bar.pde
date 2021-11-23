@@ -30,6 +30,7 @@ void draw() {
 
 void defaultStyle() {
     noStroke();
+    lightFalloff(1, 0.00104, 0);
     ambientLight(102, 102, 102);
     ambient(51, 26, 0);
     lightSpecular(204, 204, 204);
