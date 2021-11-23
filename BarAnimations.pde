@@ -143,7 +143,8 @@ public class BarAnimations {
                 bottle_pos = PVector.lerp(bottleInDrunk, bottleOnTable2, min((float) (barKeepFrame - walkinLetGo) / lerpFrameOffset, 1));
                 translate(bottle_pos.x, bottle_pos.y, bottle_pos.z);
             }
-
+            
+            spotLight(255, 240, 176, 0, bottle.getH(), 0, 0, -200, 0, PI/2, 2);
             bottle.draw();
 
         popMatrix();
