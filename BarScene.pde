@@ -1,5 +1,6 @@
 public class BarScene {
     
+    Wall frontWall;
     Wall backWall;
     PImage backTex;
     Wall entranceWall;
@@ -9,6 +10,7 @@ public class BarScene {
 
     
     Shelf shelf = new Shelf(600, 300, 100);
+    Lamp tableLamp = new Lamp(400, 30);
     
     BarTable tableMain = new BarTable(600, 100, 50);
     BarTable tableShort = new BarTable(150, 100, 50, false, true);
@@ -32,18 +34,16 @@ public class BarScene {
     public void draw() {
         pushMatrix();
         
-        pushMatrix();
-        translate(0, -100, -100);
-        popMatrix();
-        
         translate(0, 200, 0); // move everything a little lower :)
         
+
         // light
         pushMatrix();
-        pointLight(255, 255, 255, -610, -1460, 1200);
         translate(0, -backWall.getH(), 0);
         lamps.draw();
         popMatrix();
+
+        pointLight(255, 255, 255, -610, -1460, 1200);
         
         float shelfDist = -tableShort.getW() * 1.5;
         // set floor
@@ -53,16 +53,22 @@ public class BarScene {
         floor.draw();
         popMatrix();
         
-        // wall right
+        // wall entrance
         pushMatrix();
         translate(tableMain.getW() / 2, -entranceWall.getH() / 2, entranceWall.getW() / 2 + shelfDist - shelf.getD() / 2);
         rotateY(PI / 2);
         entranceWall.draw();
         popMatrix();
         
-        // wall left
+        // wall back
         pushMatrix();
         translate( -entranceWall.getW() / 2 + tableMain.getW() / 2, -entranceWall.getH() / 2, shelfDist - shelf.getD() / 2);
+        backWall.draw();
+        popMatrix();
+        
+        // wall front
+        pushMatrix();
+        translate( -entranceWall.getW() / 2 + tableMain.getW() / 2, -entranceWall.getH() / 2, shelfDist - shelf.getD() / 2 + floor.getW());
         backWall.draw();
         popMatrix();
         
@@ -101,6 +107,11 @@ public class BarScene {
         pushMatrix();
         translate( -200, -roundTable.getH(), 300 - 15);
         roundTable.draw();
+
+        pushMatrix();
+        translate(0, -backWall.getH() + roundTable.getH(), 0);
+        tableLamp.draw();
+        popMatrix();
         
         float chairDist = 80;
         translate(0, roundTable.getH() - stoolRight.getH() / 2, -chairDist);
@@ -139,10 +150,12 @@ public class BarScene {
     
     private void createWallsAndFloor() {
         this.backTex = loadImage("back.jpg");
-        this.backWall = new Wall(675, 675, backTex, 500, 500);
         this.entranceTex = loadImage("entrance.jpg");
-        this.entranceWall = new Wall(675, 675, entranceTex, 500, 500);
         this.floorTex = loadImage("floor.jpg");
+        
+        this.backWall = new Wall(675, 675, backTex, 500, 500);
+        this.frontWall = new Wall(675, 675, backTex, 500, 500);
+        this.entranceWall = new Wall(675, 675, entranceTex, 500, 500);
         this.floor = new Wall(675, 675, floorTex, 500, 500);
     }
     

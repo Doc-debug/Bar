@@ -100,6 +100,6 @@ public class Glass extends DrawableObject {
 
     private void setColorGlass() {
         fill(0, 191, 255, 130);
-        shininess(10.0);
+        shininess(2);
     }
 }

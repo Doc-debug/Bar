@@ -121,7 +121,7 @@ public class Bottle extends DrawableObject {
     private void setColorBottle() {
         colorMode(HSB, 100);
         fill(randomHue, 40, 100, 50);
-        shininess(10.0);
+        shininess(2);
     }
 
 }

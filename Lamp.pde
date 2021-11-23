@@ -23,6 +23,11 @@ public class Lamp extends DrawableObject {
 
     public void draw() {
         pushMatrix();
+            translate(0, h, 0);
+            spotLight(255, 240, 176, 0, -300, 0, 0, 200, 0, PI/2, 2);
+        popMatrix();
+
+        pushMatrix();
             translate(0, cable.getH() / 2, 0);
             pushStyle();
             cableColor();
@@ -35,8 +40,10 @@ public class Lamp extends DrawableObject {
             popStyle();
             translate(0, lampshade.getH() / 2, 0);
             pushStyle();
+            noLights(); // disable lights to make it look like it shines
             bulbColor();
             sphere(r * bulbSize);
+            spotLight(255, 240, 176, 0, -300, 0, 0, 200, 0, PI/2, 2);
             popStyle();
         popMatrix();
     }
@@ -60,11 +67,11 @@ public class Lamp extends DrawableObject {
 
     private void cableColor() {
         fill(20);
-        shininess(100);
+        shininess(10);
     }
 
     private void bulbColor() {
-        fill(255);
+        fill(255, 240, 176);
     }
 
     
