@@ -46,7 +46,6 @@ public class Bottle extends DrawableObject {
                     translate(transitionStepSize, 0, 0);
                     float transR1 = transitionFunct(i);
                     float transR2 = transitionFunct(i+1);
-                    // println("transitionFunct(0): "+transitionFunct(0));
 
                     tube(transR1, transR2, transitionStepSize);
                 }

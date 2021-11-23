@@ -5,17 +5,23 @@ class MocapInstance {
   float scl, strkWgt;
   color clr;
   int speed = 10; // frames skipped per iteration
- 
+  int playMode; // behavior after a end of data is reached, 0=start from beginning, 1=reverse, 2=stop
+
   MocapInstance (Mocap mocap1, int startingFrame, float[] transl, float scl1, color clr1, float strkWgt1) {
+    this(mocap1, startingFrame, transl, scl1, clr1, strkWgt1, 0);
+  }
+ 
+  MocapInstance (Mocap mocap1, int startingFrame, float[] transl, float scl1, color clr1, float strkWgt1, int playMode) {
     mocap = mocap1;
     currentFrame = startingFrame;
     this.startingFrame = startingFrame;
     firstFrame = startingFrame;
-    lastFrame = startingFrame-1;   
+    lastFrame = mocap.frameNumber;   
     translation = transl;
     scl = scl1;
     clr = clr1;
     strkWgt = strkWgt1;
+    this.playMode = playMode;
   }
  
   void drawMocap() {
@@ -122,12 +128,19 @@ class MocapInstance {
     }
     
     popMatrix();
-    // freeze when animation is over
-    // currentFrame = currentFrame + 2 >= mocap.frameNumber ? currentFrame : currentFrame + 2;
 
-    // restart animation when over
-    currentFrame = (currentFrame+speed) % (mocap.frameNumber);
-    if (currentFrame<=lastFrame) currentFrame = firstFrame; 
+    // handle frame progression
+    if(playMode == 0) {
+      currentFrame = (currentFrame+speed) % (mocap.frameNumber); // restart animation when over
+      if (currentFrame >= lastFrame * 2) currentFrame = lastFrame; // to prevent integer overflow
+    } else if(playMode == 1) {
+      if(currentFrame + speed > lastFrame || currentFrame + speed < firstFrame) speed = -speed;
+      currentFrame = (currentFrame+speed) % (mocap.frameNumber); // restart animation when over
+    } else if(playMode == 2) {
+      // freeze when animation is over
+      currentFrame = currentFrame + speed >= lastFrame ? currentFrame : currentFrame + speed;
+    }
+
   }
 
   PVector calcMidPoint(PVector p1, PVector p2) {
@@ -171,10 +184,11 @@ class MocapInstance {
 
   void restart() {
     currentFrame = startingFrame;
+    speed = abs(speed);
   }
 
   boolean isOver() {
-    return currentFrame + speed >= mocap.frameNumber;
+    return currentFrame + speed >= lastFrame;
   }
 
   int getFrame() {
