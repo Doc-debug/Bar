@@ -8,8 +8,9 @@ BarAnimations animation;
 
 void setup() {
     size(1920,1080,P3D);
-    camera = new PeasyCam(this, -300, 0, -300, 300);
-    camera.rotateY(-PI/3);
+    camera = new PeasyCam(this, -300, 50, -350, 300);
+    camera.rotateY(-PI/2);
+    camera.rotateX(PI/15);
     frameRate(60);
     randomSeed(1);
     
