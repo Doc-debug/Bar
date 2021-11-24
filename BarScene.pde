@@ -154,7 +154,7 @@ public class BarScene {
         this.floorTex = loadImage("floor.jpg");
         
         this.backWall = new Wall(675, 675, backTex, 500, 500);
-        this.frontWall = new Wall(675, 675, backTex, 500, 500);
+        this.frontWall = new Wall(675, 675, entranceTex, 500, 500);
         this.entranceWall = new Wall(675, 675, entranceTex, 500, 500);
         this.floor = new Wall(675, 675, floorTex, 500, 500);
     }
