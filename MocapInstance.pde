@@ -47,7 +47,7 @@ class MocapInstance {
         colorMode(HSB, 255);
         // noStroke();
         strokeWeight(1);
-        fill(0);
+        fill(255);
 
         PVector p1 = itJ.position.get(currentFrame);
         PVector p2 = itJ.parent.position.get(currentFrame);
@@ -74,12 +74,10 @@ class MocapInstance {
           box(distance, limbSize, limbSize);
         }
 
-      popStyle();
       popMatrix();
       
       //Joints
       pushMatrix();
-      fill(0);
       translate(p1.x, p1.y, p1.z);
       float jointSize = 50;
       
@@ -125,6 +123,7 @@ class MocapInstance {
       
      
       popMatrix();
+      popStyle();
     }
     
     popMatrix();
