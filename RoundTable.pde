@@ -1,3 +1,8 @@
+/**
+* Creates and Draws a round table with specified size
+*
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+*/
 public class RoundTable extends DrawableObject {
 
     float r;
@@ -56,12 +61,18 @@ public class RoundTable extends DrawableObject {
     public float getD() {
         return r * 2;
     }
-
+    
+    /**
+    * sets the color of the table top
+    */
     private void setColorPlate() {
         fill(20);
         shininess(10);
     }
-
+    
+    /**
+    * sets the color of the table foot
+    */
     private void setColorFoot() {
         fill(230);
         shininess(5);

@@ -1,14 +1,21 @@
+/**
+* Draws all passive objects in the barscene
+*
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+*/
 public class BarScene {
     
-    Wall frontWall;
-    Wall backWall;
-    PImage backTex;
-    Wall entranceWall;
-    PImage entranceTex;
-    Wall floor;
-    PImage floorTex;
-
+    // load textures for the walls
+    PImage backTex = loadImage("back.jpg");
+    PImage entranceTex = loadImage("entrance.jpg");
+    PImage floorTex = loadImage("floor.jpg");
     
+    // initialize all needed objects
+    Wall backWall = new Wall(675, 675, backTex, 500, 500);
+    Wall frontWall = new Wall(675, 675, entranceTex, 500, 500);
+    Wall entranceWall = new Wall(675, 675, entranceTex, 500, 500);
+    Wall floor = new Wall(675, 675, floorTex, 500, 500);
+
     Shelf shelf = new Shelf(600, 300, 100);
     Lamp tableLamp = new Lamp(400, 30);
     
@@ -26,17 +33,14 @@ public class BarScene {
     
     Bottle bottle = new Bottle(40);
     
-    
-    public BarScene() {
-        this.createWallsAndFloor();
-    }
-    
+    /**
+    * moves all objects to correct position and draws
+    */
     public void draw() {
         pushMatrix();
         
-        translate(0, 200, 0); // move everything a little lower :)
+        translate(0, 200, 0); // move everything a little lower
         
-
         // light
         pushMatrix();
         translate(0, -backWall.getH(), 0);
@@ -45,7 +49,7 @@ public class BarScene {
 
         pointLight(255, 255, 255, -610, -1460, 1200);
         
-        float shelfDist = -tableShort.getW() * 1.5;
+        float shelfDist = -tableShort.getW() * 1.5; // distance from midpoint to the back wall (z direction)
         // set floor
         pushMatrix();
         translate( -entranceWall.getW() / 2 + tableMain.getW() / 2, 0, entranceWall.getW() / 2 + shelfDist - shelf.getD() / 2);
@@ -108,11 +112,13 @@ public class BarScene {
         translate( -200, -roundTable.getH(), 300 - 15);
         roundTable.draw();
 
+        // lamp above round table
         pushMatrix();
         translate(0, -backWall.getH() + roundTable.getH(), 0);
         tableLamp.draw();
         popMatrix();
         
+        // two stools next to the round table
         float chairDist = 80;
         translate(0, roundTable.getH() - stoolRight.getH() / 2, -chairDist);
         stoolRight.draw();
@@ -124,6 +130,10 @@ public class BarScene {
         popMatrix();
     }
     
+    /**
+    * Creates array of specified size containing stool objects
+    * (there was a problem with creating a static mathod in the stool class so we put that here)
+    */
     Stool[] createStools(int n, float stoolHeight) {
         Stool[] stools = new Stool[n];
         for (int i = 0; i < n; ++i) {
@@ -132,6 +142,10 @@ public class BarScene {
         return stools;
     }
     
+    /**
+    * Creates array of specified size containing glass objects
+    * (there was a problem with creating a static mathod in the glass class so we put that here)
+    */
     Glass[] createGlasses(int n, float radius) {
         Glass[] glasses = new Glass[n];
         for (int i = 0; i < n; ++i) {
@@ -140,6 +154,10 @@ public class BarScene {
         return glasses;
     }
     
+    /**
+    * Creates array of specified size containing lamp objects
+    * (there was a problem with creating a static mathod in the lamp class so we put that here)
+    */
     Lamp[] createLamps(int n, float lampHeight, float radius) {
         Lamp[] lamps = new Lamp[n];
         for (int i = 0; i < n; ++i) {
@@ -147,16 +165,4 @@ public class BarScene {
         }
         return lamps;
     }
-    
-    private void createWallsAndFloor() {
-        this.backTex = loadImage("back.jpg");
-        this.entranceTex = loadImage("entrance.jpg");
-        this.floorTex = loadImage("floor.jpg");
-        
-        this.backWall = new Wall(675, 675, backTex, 500, 500);
-        this.frontWall = new Wall(675, 675, entranceTex, 500, 500);
-        this.entranceWall = new Wall(675, 675, entranceTex, 500, 500);
-        this.floor = new Wall(675, 675, floorTex, 500, 500);
-    }
-    
 }

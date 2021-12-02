@@ -1,3 +1,8 @@
+/**
+* Creates and Draws a Cylinder or cone with specified size (and rotation)
+*
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+*/
 public class Cylinder extends DrawableObject  {
 
     int sides;

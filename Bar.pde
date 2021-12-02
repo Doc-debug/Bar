@@ -1,6 +1,10 @@
 import processing.opengl.*;
 import peasy.*;
 
+/**
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+*/
+
 PeasyCam camera;
 
 BarScene scene;
@@ -28,6 +32,9 @@ void draw() {
     animation.draw();
 }
 
+/**
+* sets defaults for lighting in the whole scene
+*/
 void defaultStyle() {
     noStroke();
     lightFalloff(1, 0.00104, 0);

@@ -1,3 +1,8 @@
+/**
+* Creates and Draws a Bartable with specified size
+*
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+*/
 public class BarTable extends DrawableObject {
 
     float w;
@@ -49,12 +54,18 @@ public class BarTable extends DrawableObject {
     public float getD() {
         return d;
     }
-
+ 
+    /**
+    * sets the color of the top part of the table
+    */
     private void setColorPlate() {
         fill(20);
         shininess(10);
     }
-
+    
+    /**
+    * sets the color of the bottom part of the table
+    */
     private void setColorFoot() {
         fill(230);
         shininess(5);

@@ -1,3 +1,8 @@
+/**
+* Creates and Draws a Bottle with specified size
+*
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+*/
 public class Bottle extends DrawableObject {
 
     float h;
@@ -60,6 +65,9 @@ public class Bottle extends DrawableObject {
         popMatrix();
     }
 
+    /**
+    * calculates the transition curve from bottle neck to body
+    */
     private float transitionFunct(float x) {
         float start = 1;
         float end = 0;
@@ -71,6 +79,9 @@ public class Bottle extends DrawableObject {
         return r - inverseThick * (1 - subRatio);
     }
 
+    /**
+    * creates a tube only (a cylinder without the end caps)
+    */
     private void tube(float r1, float r2, float h) {
         pushMatrix();
             rotateY(PI / 2);
@@ -91,6 +102,9 @@ public class Bottle extends DrawableObject {
         popMatrix();
     }
 
+    /**
+    * draws a disc shaped plane
+    */
     private void lid(float r) {
         pushMatrix();
             rotateY(PI / 2);
@@ -117,7 +131,10 @@ public class Bottle extends DrawableObject {
     public float getD() {
         return r * 2;
     }
-
+    
+    /**
+    * sets the color of the bottle
+    */
     private void setColorBottle() {
         colorMode(HSB, 100);
         fill(randomHue, 40, 100, 50);

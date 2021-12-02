@@ -1,6 +1,10 @@
 import java.util.Arrays;
 
-
+/**
+* Creates and Draws a shelf with bottles inside with specified size
+*
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+*/
 public class Shelf extends DrawableObject {
     float w;
     float h;
@@ -17,8 +21,6 @@ public class Shelf extends DrawableObject {
     
     float bottleSize = 50;
     DrawArray[] shelfBottles;
-
-    Curtain curtain;
     
     public Shelf(float shelfWidth, float shelfHeight, float shelfDepth) {
         this.w = shelfWidth;
@@ -40,10 +42,6 @@ public class Shelf extends DrawableObject {
         
         float innerWidth = w - w * sideMargin * 2;
         float innerHeight = h - h * botMargin - h * topMargin;
-        float curtain_height = (this.h - innerHeight - this.w * shelfThickness) / 3;
-        float curtain_depth = this.d * 0.2;
-
-        this.curtain = new Curtain(innerWidth, curtain_height, curtain_depth);
     }
     
     public void draw() {
@@ -81,25 +79,22 @@ public class Shelf extends DrawableObject {
         float shelfOffset = innerHeight / 4;
         translate(0, -h * botMargin / 2, 0);
 
-        pushMatrix();
-        translate(0, -(curtain.getH() / 2), 0);
-        // curtain.draw(); // curtain still does not work properly
-        popMatrix();
-
         translate(0, -shelfOffset, 0);
-
+        // places bottles on first horizontal 
         box(innerWidth, h * shelfThickness, d * shelfDepth);
         placeBottles(0, innerWidth / 3);
         placeBottles(1, 0);
         placeBottles(2, -innerWidth / 3);
         
         translate(0, -shelfOffset, 0);
+        // places bottles on second horizontal 
         box(innerWidth, h * shelfThickness, d * shelfDepth);
         placeBottles(3, innerWidth / 3);
         placeBottles(4, 0);
         placeBottles(5, -innerWidth / 3);
         
         translate(0, -shelfOffset, 0);
+        // places bottles on third horizontal 
         box(innerWidth, h * shelfThickness, d * shelfDepth);
         placeBottles(6, innerWidth / 3);
         placeBottles(7, 0);
@@ -134,6 +129,9 @@ public class Shelf extends DrawableObject {
         return d;
     }
     
+    /**
+    * sets the color of the shelf
+    */
     private void setColorShelf() {
         fill(20);
         shininess(10);
@@ -141,7 +139,9 @@ public class Shelf extends DrawableObject {
     
 }
 
-
+/**
+* Creates array of specified size containing bottle objects
+*/
 Bottle[] createBottles(int n, float bottleHeight) {
     Bottle[] bottles = new Bottle[n];
     for (int i = 0; i < n; ++i) {

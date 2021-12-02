@@ -1,3 +1,8 @@
+/**
+* Creates and Draws a Glass with specified size
+*
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+*/
 public class Glass extends DrawableObject {
 
     float r;
@@ -33,6 +38,9 @@ public class Glass extends DrawableObject {
         popMatrix();
     }
 
+    /**
+    * draws a tube only (a cylinder without the end caps)
+    */
     private void tube(float r1, float r2, float h) {
         pushMatrix();
             rotateX(PI / 2);
@@ -53,6 +61,9 @@ public class Glass extends DrawableObject {
         
     }
 
+    /**
+    * draws a ring for the top part of the glass
+    */
     private void inset(float r1, float r2) {
         pushMatrix();
             rotateX(PI / 2);
@@ -71,6 +82,9 @@ public class Glass extends DrawableObject {
         popMatrix();
     }
 
+    /**
+    * draws a disc shaped plane
+    */
     private void lid(float r) {
         pushMatrix();
             rotateX(PI / 2);
@@ -98,6 +112,9 @@ public class Glass extends DrawableObject {
         return r * 2;
     }
 
+    /**
+    * sets the color of the glass
+    */
     private void setColorGlass() {
         fill(0, 191, 255, 130);
         shininess(2);

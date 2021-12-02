@@ -1,3 +1,8 @@
+/**
+* Creates and Draws a Lamp with specified size
+*
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+*/
 public class Lamp extends DrawableObject {
 
     float h;
@@ -28,21 +33,29 @@ public class Lamp extends DrawableObject {
         popMatrix();
 
         pushMatrix();
+            
+            // cable
             translate(0, cable.getH() / 2, 0);
             pushStyle();
             cableColor();
             cable.draw();
             popStyle();
+
+            // lampshade
             translate(0, cable.getH() / 2 + lampshade.getH() / 2, 0);
             pushStyle();
             shadeColor();
             lampshade.draw();
             popStyle();
+            
+            // bulb
             translate(0, lampshade.getH() / 2, 0);
             pushStyle();
             noLights(); // disable lights to make it look like it shines
             bulbColor();
             sphere(r * bulbSize);
+
+            // the actual light
             spotLight(255, 240, 176, 0, -300, 0, 0, 200, 0, PI/2, 2);
             popStyle();
         popMatrix();
@@ -60,20 +73,26 @@ public class Lamp extends DrawableObject {
         return r * 2;
     }
 
+    /**
+    * sets the color of the shade
+    */
     private void shadeColor() {
         fill(20);
         shininess(10);
     }
 
+    /**
+    * sets the color of the cable
+    */
     private void cableColor() {
         fill(20);
         shininess(10);
     }
 
+    /**
+    * sets the color of the bulb
+    */
     private void bulbColor() {
         fill(255, 240, 176);
     }
-
-    
-
 }

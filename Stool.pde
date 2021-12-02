@@ -1,3 +1,8 @@
+/**
+* Creates and Draws a stool with specified size
+*
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+*/
 public class Stool extends DrawableObject {
 
     float h;
@@ -64,12 +69,18 @@ public class Stool extends DrawableObject {
     public float getD() {
         return r * 2;
     }
-
+    
+    /**
+    * sets the color of the seat
+    */
     private void setColorSeat() {
         fill(0);
         shininess(10);
     }
-
+    
+    /**
+    * sets the color of the foot
+    */
     private void setColorMetal() {
         fill(220);
         shininess(35);

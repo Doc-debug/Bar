@@ -1,3 +1,9 @@
+/**
+* Draws Mocap data with skinning
+*
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+* Modified from files provided in class
+*/
 class MocapInstance {   
   Mocap mocap;
   int currentFrame, firstFrame, lastFrame, startingFrame;
@@ -142,10 +148,16 @@ class MocapInstance {
 
   }
 
+  /**
+  * returns a vector that is between the two given vectors
+  */
   PVector calcMidPoint(PVector p1, PVector p2) {
-      return new PVector((p1.x + p2.x) / 2, (p1.y + p2.y) / 2, (p1.z + p2.z) / 2);
+      return p1.copy().add(p2).mult(0.5);
   }
 
+  /**
+  * rotates on the Z axis of a given limb
+  */
   void setLimbRotation(int limb, PVector initialDirection) {
     Joint joint = mocap.joints.get(limb);
     PVector p1 = joint.position.get(currentFrame);
@@ -159,9 +171,12 @@ class MocapInstance {
     rotateZ(rotationAngle * rotationAxis.z);
   }
 
+  /**
+  * aligns rotation to two given vectors
+  */
   void alignToVector(PVector initialDirection, PVector p1, PVector p2) {
 
-    PVector midPoint = p1.copy().add(p2).mult(0.5);
+    PVector midPoint = calcMidPoint(p1, p2);
     PVector newDirection = p2.copy().sub(p1).normalize(); 
     PVector rotationAxis = initialDirection.cross(newDirection).normalize();
     float rotationAngle = acos(initialDirection.dot(newDirection));
@@ -171,25 +186,37 @@ class MocapInstance {
     Rotate(rotationAngle, rotationAxis.x, rotationAxis.y, rotationAxis.z);
   }
 
+  /**
+  * rotates to specified axises
+  */
   void Rotate(float angle, float x, float y, float z) {
       float c = cos(angle);
       float s = sin(angle);
-      applyMatrix(
+      applyMatrix( // rotation matrix
           x*x*(1.0f-c)+c,   x*y*(1.0f-c)-z*s, x*z*(1.0f-c)+y*s, 0.0f,
           y*x*(1.0f-c)+z*s, y*y*(1.0f-c)+c,   y*z*(1.0f-c)-x*s, 0.0f,
           z*x*(1.0f-c)-y*s, z*y*(1.0f-c)+x*s, z*z*(1.0f-c)+c,   0.0f,
           0.0f,             0.0f,             0.0f,             1.0f );
   }
 
+  /**
+  * sets the current frame to the starting frame
+  */
   void restart() {
     currentFrame = startingFrame;
     speed = abs(speed);
   }
 
+  /**
+  * returns if the mocap data is over
+  */
   boolean isOver() {
     return currentFrame + speed >= lastFrame;
   }
 
+  /**
+  * returns the current frame
+  */
   int getFrame() {
     return currentFrame;
   }

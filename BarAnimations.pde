@@ -1,3 +1,8 @@
+/**
+* Contains all animations like dynamic objects and mocap drawing of the scene
+*
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+*/
 public class BarAnimations {
 
     Mocap walkInMocap;
@@ -10,16 +15,18 @@ public class BarAnimations {
     MocapInstance personSittingRightMocapInst;
     MocapInstance personSittingLeftMocapInst;
 
-    float mocapScale = -0.1;
-    float heightOffset = 200;
-    float strokeThickness = 50;
-    color strokeColor = color(255, 255, 0);
+    float mocapScale = -0.1; // size of the mocap data
+    float heightOffset = 200; // offset of the mocap data
+    float strokeThickness = 50; // stroke size of the mocap data -> stroke is disabled this is just for debugging
+    color strokeColor = color(255, 255, 0); // stroke color
 
+    // positions offsets of the individual mocap data
     float[] walkInOffset =              new float[] {-170, heightOffset, 50};
     float[] barKeeperOffset =           new float[] { 100, heightOffset, 20};
     float[] personSittingRightOffset =  new float[] {-350, heightOffset, -200};
     float[] personSittingLeftOffset =   new float[] {-200, heightOffset, -200};
 
+    // frame offset for individual mocap data
     int walkInTimeOffset =                0;
     int barKeeperTimeOffset =             2000;
     int personSittingRightTimeOffset =    1700;
@@ -32,7 +39,9 @@ public class BarAnimations {
 
     int lerpFrameOffset = 50; // eg when switching bottle from hand to position how many frames before and after are used to lerp position
 
-
+    /**
+    * initializes mocap objects
+    */
     public BarAnimations () {
        walkInMocap = new Mocap("mocap_data/person_walking_in.bvh");
        barKeeperMocap = new Mocap("mocap_data/barkeeper.bvh");
@@ -45,6 +54,9 @@ public class BarAnimations {
         personSittingLeftMocapInst =    new MocapInstance(personSittingLeftMocap, personSittingLeftTimeOffset, personSittingLeftOffset, mocapScale, strokeColor, strokeThickness);
     }
 
+    /**
+    * draws mocap data and dynamic objects
+    */
     public void draw() {
         pushMatrix();
             rotateY(PI / 2);
@@ -57,6 +69,9 @@ public class BarAnimations {
         restart();
     }
 
+    /**
+    * restarts all mocap frames when the scene is over
+    */
     public void restart() {
         if(walkInMocapInst.isOver()) {
             walkInMocapInst.restart();
@@ -66,11 +81,15 @@ public class BarAnimations {
         }
     }
 
+    /**
+    * Moves "dynamic objects" at specific vectors on specific frames
+    */
     public void dynamicObjects() {
         pushMatrix();
             int leftSittingFrame = personSittingLeftMocapInst.getFrame();
 
             PVector glass_1_pos;
+            // local vector (from mocap data) * mocap scale + absolute vector(to mocap data)
             PVector glass1Hand = personSittingLeftMocap.joints.get(15).position.get(personSittingLeftMocapInst.getFrame()).copy().mult(mocapScale).add(new PVector(personSittingLeftOffset[0], personSittingLeftOffset[1], personSittingLeftOffset[2]));
             PVector glass1Table = new PVector(565, 870, 182).mult(mocapScale).add(new PVector(personSittingLeftOffset[0], personSittingLeftOffset[1], personSittingLeftOffset[2]));
 
@@ -90,6 +109,7 @@ public class BarAnimations {
             int rightSittingFrame = personSittingRightMocapInst.getFrame();
 
             PVector glass_2_pos;
+            // local vector (from mocap data) * mocap scale + absolute vector(to mocap data)
             PVector glass2Hand = personSittingRightMocap.joints.get(15).position.get(personSittingRightMocapInst.getFrame()).copy().mult(mocapScale).add(new PVector(personSittingRightOffset[0], personSittingRightOffset[1], personSittingRightOffset[2]));
             PVector glass2Table = new PVector(-347, 870, -89).mult(mocapScale).add(new PVector(personSittingRightOffset[0], personSittingRightOffset[1], personSittingRightOffset[2]));
 

@@ -1,3 +1,9 @@
+/**
+* Creates and Draws a Curtain with specified size
+*
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+* Modified from files provided in class
+*/
 public class Curtain {
     
     float w;

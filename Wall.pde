@@ -1,3 +1,8 @@
+/**
+* Creates and Draws a Wall / Plane with specified size and texture
+*
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+*/
 public class Wall extends DrawableObject{
     
     PImage tex;
@@ -36,6 +41,9 @@ public class Wall extends DrawableObject{
         return w;
     }
     
+    /**
+    * sets the color of the wall
+    */
     private void setColorWall() {
         fill(230);
         shininess(100);
