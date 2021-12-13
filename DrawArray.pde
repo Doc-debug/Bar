@@ -3,7 +3,7 @@ import java.util.Arrays;
 /**
 * Draws an array of given drawableobjects on a given axis
 *
-* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 10.10.2021
 */
 public class DrawArray {
 

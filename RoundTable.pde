@@ -1,7 +1,7 @@
 /**
 * Creates and Draws a round table with specified size
 *
-* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 18.10.2021
 */
 public class RoundTable extends DrawableObject {
 

@@ -1,7 +1,7 @@
 /**
 * Contains all animations like dynamic objects and mocap drawing of the scene
 *
-* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 8.10.2021
 */
 public class BarAnimations {
 

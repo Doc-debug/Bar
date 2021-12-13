@@ -1,7 +1,7 @@
 /**
 * reads all the data from the bhv file
 *
-* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 13.10.2021
 * Modified from files provided in class
 */
 class Mocap {

@@ -1,7 +1,7 @@
 /**
 * Creates and Draws a Bottle with specified size
 *
-* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 10.10.2021
 */
 public class Bottle extends DrawableObject {
 

@@ -1,7 +1,7 @@
 /**
 * Draws all passive objects in the barscene
 *
-* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 26.10.2021
 */
 public class BarScene {
     

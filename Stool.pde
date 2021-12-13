@@ -1,7 +1,7 @@
 /**
 * Creates and Draws a stool with specified size
 *
-* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 9.10.2021
 */
 public class Stool extends DrawableObject {
 
