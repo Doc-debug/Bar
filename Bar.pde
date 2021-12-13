@@ -1,20 +1,16 @@
-import processing.opengl.*;
-import peasy.*;
 
 /**
-* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 2.12.2021
+* Main Class File
+*
+* Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 12.10.2021
 */
-
-PeasyCam camera;
 
 BarScene scene;
 BarAnimations animation;
 
 void setup() {
     size(1920,1080,P3D);
-    camera = new PeasyCam(this, -300, 50, -350, 300);
-    camera.rotateY(-PI/2);
-    camera.rotateX(PI/15);
+    camera(-540, 0, -400, 0, 90, -429, 0, 1, 0);
     frameRate(60);
     randomSeed(1);
     
