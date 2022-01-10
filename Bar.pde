@@ -25,6 +25,9 @@ void draw() {
     
     translate(0, 0, -500);
     scene.draw();
+    
+    directionalLight(126, 126, 126, 0, 0, -1);
+    ambientLight(102, 102, 102);
     animation.draw();
 }
 

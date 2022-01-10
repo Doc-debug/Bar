@@ -133,7 +133,7 @@ public class Shelf extends DrawableObject {
     * sets the color of the shelf
     */
     private void setColorShelf() {
-        fill(20);
+        fill(120);
         shininess(10);
     }
     

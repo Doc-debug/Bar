@@ -50,7 +50,7 @@ class MocapInstance {
 
       pushMatrix();
       pushStyle();
-        colorMode(HSB, 255);
+        //colorMode(HSB, 255);
         // noStroke();
         strokeWeight(1);
         fill(255);
@@ -66,15 +66,19 @@ class MocapInstance {
         PVector bodySize = new PVector(distance, 200, 150);
 
         if(i <= 3) { // body
-          fill(0, 255, 0);
+          fill(255, 255, 255);
           box(bodySize.x, bodySize.y, bodySize.z);
         } else if(i <= 4){ // neck
+          fill(255, 205, 128);
           box(distance + 15, limbSize - 30, limbSize - 30);
         } else if(i <= 5) { // head
+          fill(255, 205, 128);
           sphere(distance / 2 +20);
         } else if(i <= 15) { // arms
+          fill(255, 205, 128);
           box(distance, limbSize, limbSize);
         } else if(i <= 25) { // legs
+          fill(22, 22, 102);
           box(distance, limbSize, limbSize);
         } else { // other data ??
           box(distance, limbSize, limbSize);
@@ -88,15 +92,21 @@ class MocapInstance {
       float jointSize = 50;
       
       if(i<1){ // hips
+        fill(22, 22, 102);
         sphere(jointSize * 2);
       } else if(i <= 2){ // body
+        fill(255, 255, 255);
         sphere(bodySize.y / 2);
       } else if(i <= 4){ // neck
         sphere(jointSize - 10);
       } else if(i <= 5){ // head
         //sphere(0);
       } else if(i <= 6){ // left shoulder
+        fill(255, 255, 255);
         sphere(jointSize + 30);
+      } else if(i <= 7){ // left shoulder
+        fill(255, 255, 255);
+        sphere(jointSize + 10);
       } else if(i <= 8){ // left elbow
         sphere(jointSize + 10);
       } else if(i <= 9 ){ // left wrist
@@ -104,7 +114,11 @@ class MocapInstance {
       } else if(i <= 10){ // left hand
         //sphere(0); 
       } else if(i <= 11){ //right shoulder
+        fill(255, 255, 255);
         sphere(jointSize + 30);
+      } else if(i <= 12){ // right shoulder
+        fill(255, 255, 255);
+        sphere(jointSize + 10);
       } else if(i <= 13){ // right elbow
         sphere(jointSize + 10);
       } else if(i <= 14 ){ // right wrist
