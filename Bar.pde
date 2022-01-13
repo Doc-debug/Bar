@@ -5,12 +5,18 @@
 * Created by Sofia Martinez, Jan Naubert, Patrick Neumann on 12.10.2021
 */
 
+// import peasy.*;          // uncomment if you want to use peasycam
+// PeasyCam camera;         // uncomment if you want to use peasycam
+
 BarScene scene;
 BarAnimations animation;
 
 void setup() {
     size(1920,1080,P3D);
     camera(-540, 0, -400, 0, 90, -429, 0, 1, 0);
+    // camera = new PeasyCam(this, -250, 50, -420, 300);    // uncomment if you want to use peasycam
+    // camera.rotateY(-PI/2);                               // uncomment if you want to use peasycam
+    // camera.rotateX(PI/15);                               // uncomment if you want to use peasycam
     frameRate(60);
     randomSeed(1);
     
